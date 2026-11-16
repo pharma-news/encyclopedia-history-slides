@@ -9,10 +9,18 @@
   var counter = document.querySelector('[data-counter]');
   var bar = document.querySelector('[data-progress]');
   var nextBtn = document.querySelector('[data-next]');
+  var nav = Array.prototype.slice.call(document.querySelectorAll('.topbar__nav a'));
   if (!slides.length) return;
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var current = -1;
+
+  /* к каждой ссылке раздела привязан номер слайда, к которому она ведёт */
+  var navIndex = nav.map(function (a) {
+    var id = (a.getAttribute('href') || '').slice(1);
+    for (var k = 0; k < slides.length; k++) { if (slides[k].id === id) return k; }
+    return -1;
+  });
 
   function pad(n) { return String(n).padStart(2, '0'); }
   function total() { return pad(slides.length); }
@@ -26,6 +34,11 @@
       if (k === i) d.setAttribute('aria-current', 'true');
       else d.removeAttribute('aria-current');
     });
+
+    /* подсветка раздела, которому принадлежит слайд */
+    var best = -1;
+    navIndex.forEach(function (idx, k) { if (idx >= 0 && idx <= i) best = k; });
+    nav.forEach(function (a, k) { a.classList.toggle('is-on', k === best); });
 
     if (counter) counter.textContent = pad(i + 1) + '\u00a0/\u00a0' + total();
 
