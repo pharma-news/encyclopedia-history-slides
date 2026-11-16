@@ -741,3 +741,176 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   .stage { border-color: #d7d0c4; background: #fbf8f2; box-shadow: none; }
   .lead, .card__d, .cap, .tile span, .timeline__item { color: #3b3742; }
 }
+
+/* ============================================================
+   VISUAL POLISH — 2026
+   Единая визуальная полировка: глубина, свет, ритм, контраст.
+   Правила идут после базовых и усиливают, а не заменяют их.
+   ============================================================ */
+
+:root {
+  --glow: color-mix(in srgb, var(--acc) 30%, transparent);
+  --glass: rgba(246, 241, 231, 0.055);
+  --glass-strong: rgba(246, 241, 231, 0.09);
+  --shadow-soft: 0 calc(var(--s) * 0.8) calc(var(--s) * 2.2) rgba(0, 0, 0, 0.38);
+  --shadow-deep: 0 calc(var(--s) * 1.6) calc(var(--s) * 4.4) rgba(0, 0, 0, 0.62);
+}
+
+/* Более глубокий, но не «тяжёлый» фон */
+body {
+  background:
+    radial-gradient(90% 70% at 78% -8%, color-mix(in srgb, var(--acc) 9%, transparent), transparent 62%),
+    radial-gradient(70% 60% at 8% 88%, color-mix(in srgb, var(--acc-2) 8%, transparent), transparent 66%),
+    linear-gradient(180deg, #12101d, #07060c 72%);
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 48% at 82% 12%, var(--glow), transparent 70%),
+    radial-gradient(48% 44% at 8% 88%, color-mix(in srgb, var(--acc-2) 16%, transparent), transparent 72%);
+  opacity: 0.5;
+  filter: blur(calc(var(--s) * 1.4));
+}
+
+/* Заголовки: больше воздуха и визуальной иерархии */
+.head { padding-bottom: calc(var(--s) * 0.35); }
+.idx {
+  font-size: calc(var(--s) * 2.5);
+  -webkit-text-stroke: 1.4px color-mix(in srgb, var(--acc) 82%, transparent);
+  text-shadow: 0 0 calc(var(--s) * 1.6) var(--glow);
+}
+.title {
+  font-size: calc(var(--fs-title) * 1.04);
+  text-shadow: 0 calc(var(--s) * 0.16) calc(var(--s) * 1.1) rgba(0, 0, 0, 0.55);
+}
+.era { letter-spacing: 0.24em; }
+
+/* Текст: контрастнее и спокойнее */
+.lead { line-height: 1.62; }
+.lead--dim { color: rgba(246, 241, 231, 0.72); }
+.prose > .lead:first-of-type { font-size: calc(var(--fs-lead) * 1.05); }
+
+/* «Витрина» каждого слайда: более цельная композиция */
+.stage {
+  padding: calc(var(--s) * 1.35) calc(var(--s) * 1.45);
+  border: 1px solid color-mix(in srgb, var(--acc) 20%, var(--line));
+  background:
+    radial-gradient(120% 88% at 72% 2%, color-mix(in srgb, var(--acc) 14%, transparent), transparent 60%),
+    linear-gradient(158deg, var(--glass-strong), rgba(246, 241, 231, 0.015) 62%),
+    rgba(9, 8, 15, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(246, 241, 231, 0.08),
+    var(--shadow-deep);
+}
+.stage::before {
+  height: 3px;
+  background: linear-gradient(90deg, var(--acc), color-mix(in srgb, var(--acc) 20%, transparent) 72%, transparent);
+  opacity: 0.8;
+}
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: auto calc(var(--s) * 1) calc(var(--s) * -0.5) calc(var(--s) * 1);
+  height: calc(var(--s) * 1.1);
+  border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 50%, var(--glow), transparent 72%);
+  filter: blur(calc(var(--s) * 0.8));
+  opacity: 0.45;
+  pointer-events: none;
+}
+.stage:hover { transform: translateY(calc(var(--s) * -0.28)) scale(1.006); }
+
+.art { filter: drop-shadow(0 calc(var(--s) * 0.5) calc(var(--s) * 1.5) rgba(0, 0, 0, 0.45)); }
+.cap {
+  max-width: none;
+  color: rgba(246, 241, 231, 0.7);
+  border-left: 2px solid color-mix(in srgb, var(--acc) 38%, transparent);
+  padding-left: calc(var(--s) * 0.55);
+}
+
+/* Цифры: главный визуальный акцент */
+.tiles { border-top-color: color-mix(in srgb, var(--acc) 26%, transparent); }
+.tile b {
+  font-size: calc(var(--fs-stat) * 1.02);
+  color: #fff;
+  text-shadow: 0 0 calc(var(--s) * 1.5) var(--glow);
+}
+.tile span { color: rgba(246, 241, 231, 0.66); }
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 calc(var(--s) * -0.25) 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--acc), transparent);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+.tile { position: relative; }
+.tile:hover::after { opacity: 1; }
+
+/* Выноски и чипы */
+.pull {
+  font-size: calc(var(--s) * 1.85);
+  border-left-width: 3px;
+  text-shadow: 0 0 calc(var(--s) * 1.6) var(--glow);
+}
+.callout {
+  background: linear-gradient(120deg, color-mix(in srgb, var(--acc) 16%, transparent), rgba(246, 241, 231, 0.03));
+  box-shadow: var(--shadow-soft);
+}
+.chip { backdrop-filter: blur(calc(var(--s) * 0.25)); }
+
+/* Карточки XIX века */
+.card {
+  border-color: color-mix(in srgb, var(--acc) 16%, var(--line));
+  background:
+    radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--acc) 10%, transparent), transparent 58%),
+    linear-gradient(165deg, var(--glass-strong), rgba(246, 241, 231, 0.012));
+  box-shadow: var(--shadow-soft);
+}
+.card:hover { box-shadow: 0 calc(var(--s) * 1.2) calc(var(--s) * 3.2) rgba(0, 0, 0, 0.58); }
+.card__t { color: #fff; }
+.card__d { color: rgba(246, 241, 231, 0.68); }
+
+/* Финальная хронология */
+.timeline__item {
+  background: linear-gradient(165deg, var(--glass), rgba(246, 241, 231, 0.012));
+  box-shadow: var(--shadow-soft);
+}
+.timeline__item b { color: #fff; text-shadow: 0 0 calc(var(--s) * 1.1) var(--glow); }
+
+/* Навигация: заметнее, но не навязчиво */
+.topbar { background: linear-gradient(180deg, rgba(7, 6, 12, 0.9), rgba(7, 6, 12, 0)); }
+.topbar__nav a { opacity: 0.78; }
+.dots a { border-color: rgba(246, 241, 231, 0.38); }
+.dots a.is-active { box-shadow: 0 0 calc(var(--s) * 1.1) var(--glow); }
+.next { box-shadow: var(--shadow-soft); }
+
+/* Появление: мягче и «дороже» */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(calc(var(--s) * 2.1)) scale(0.978); filter: blur(calc(var(--s) * 0.18)); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* Плавное свечение акцента на активных элементах */
+@keyframes acc-pulse {
+  0%, 100% { box-shadow: 0 0 calc(var(--s) * 0.5) var(--glow); }
+  50% { box-shadow: 0 0 calc(var(--s) * 1.4) var(--glow); }
+}
+.dots a.is-active { animation: acc-pulse 3.6s var(--ease) infinite; }
+
+/* Печать: сохранить читаемость и порядок */
+@media print {
+  .stage, .card, .timeline__item {
+    box-shadow: none;
+    background: #fbf8f2;
+    border-color: #d7d0c4;
+  }
+  .art { filter: none; }
+  .tile b, .timeline__item b { color: #171420; text-shadow: none; }
+}
