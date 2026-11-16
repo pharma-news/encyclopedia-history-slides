@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4500 лет слову — история словарей и энциклопедий</title>
+<meta name="description" content="От глиняных табличек Шумера до Большой российской энциклопедии: 13 глав о том, как человечество собирало, проверяло и распространяло знания.">
+<meta property="og:title" content="4500 лет слову — история словарей и энциклопедий">
+<meta property="og:description" content="Клинопись, Плиний, Юнлэ, Дидро, Даль, БСЭ, Википедия. Интерактивная презентация на HTML + CSS.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;900&family=Manrope:wght@300;400;500;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/slides.css">
+<script src="assets/deck.js" defer></script>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="brand" href="#top">
+    <span class="brand__glyph">4500</span>
+    <span class="brand__txt">лет&nbsp;слову<span class="brand__dot">.</span></span>
+  </a>
+  <nav class="topbar__nav" aria-label="Разделы">
+    <a href="#s1">Древность</a>
+    <a href="#s4">Просвещение</a>
+    <a href="#s7">Русь и Россия</a>
+    <a href="#s11">XX&nbsp;век</a>
+    <a href="#s13">Цифра</a>
+  </nav>
+  <div class="counter" data-counter aria-hidden="true">01&nbsp;/&nbsp;15</div>
+</header>
+
+<nav class="dots" aria-label="Навигация по слайдам">
+  <a href="#top" data-dot="0"></a>
+  <a href="#s1" data-dot="1"></a>
+  <a href="#s2" data-dot="2"></a>
+  <a href="#s3" data-dot="3"></a>
+  <a href="#s4" data-dot="4"></a>
+  <a href="#s5" data-dot="5"></a>
+  <a href="#s6" data-dot="6"></a>
+  <a href="#s7" data-dot="7"></a>
+  <a href="#s8" data-dot="8"></a>
+  <a href="#s9" data-dot="9"></a>
+  <a href="#s10" data-dot="10"></a>
+  <a href="#s11" data-dot="11"></a>
+  <a href="#s12" data-dot="12"></a>
+  <a href="#s13" data-dot="13"></a>
+  <a href="#s14" data-dot="14"></a>
+</nav>
+
+<main class="deck">
+
+  <!-- 00 · ТИТУЛ -->
+  <section class="slide slide--cover is-title" id="top">
+    <div class="cover__mark" aria-hidden="true">
+      <span class="cover__tablet">
+        <i class="w"></i><i class="w"></i><i class="w"></i><i class="w"></i><i class="w"></i>
+        <i class="w"></i><i class="w"></i><i class="w"></i><i class="w"></i><i class="w"></i>
+        <i class="w"></i><i class="w"></i><i class="w"></i><i class="w"></i><i class="w"></i>
+        <i class="w"></i><i class="w"></i><i class="w"></i><i class="w"></i><i class="w"></i>
+      </span>
+    </div>
+
+    <div class="cover__body">
+      <p class="cover__kicker">Интерактивная лекция · история справочных изданий</p>
+      <h1 class="cover__title">
+        <span class="cover__line">От глиняной</span>
+        <span class="cover__line">таблички</span>
+        <span class="cover__amp">до</span>
+        <span class="cover__line cover__line--wiki">Википедии</span>
+      </h1>
+      <p class="cover__lead">Как человечество 4500&nbsp;лет собирает знания в одну книгу — и почему идея словаря старше алфавита.</p>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>≈4500 лет</span><em>·</em><span>37 книг Плиния</span><em>·</em><span>11&nbsp;095 томов Юнлэ</span><em>·</em><span>370&nbsp;000&nbsp;000 иероглифов</span><em>·</em><span>71&nbsp;818 статей Дидро</span><em>·</em><span>43&nbsp;257 слов Дашковой</span><em>·</em><span>200&nbsp;000 слов Даля</span><em>·</em><span>82 полутома Брокгауза и Ефрона</span><em>·</em><span>15&nbsp;820 авторов БСЭ</span><em>·</em><span>36 томов БРЭ</span><em>·</em>
+        <span>≈4500 лет</span><em>·</em><span>37 книг Плиния</span><em>·</em><span>11&nbsp;095 томов Юнлэ</span><em>·</em><span>370&nbsp;000&nbsp;000 иероглифов</span><em>·</em><span>71&nbsp;818 статей Дидро</span><em>·</em><span>43&nbsp;257 слов Дашковой</span><em>·</em><span>200&nbsp;000 слов Даля</span><em>·</em><span>82 полутома Брокгауза и Ефрона</span><em>·</em><span>15&nbsp;820 авторов БСЭ</span><em>·</em><span>36 томов БРЭ</span><em>·</em>
+      </div>
+    </div>
+
+    <div class="scrollcue" aria-hidden="true"><span>листай вниз или стрелками</span><b>↓</b></div>
+  </section>
+
+  <!-- 01 -->
+  <section class="slide slide--clay" id="s1">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">01</span>
+        <span class="era">Междуречье · Шумер</span>
+        <h2 class="title">Начало:<br>таблички из&nbsp;глины</h2>
+      </header>
+
+      <div class="prose">
+        <p class="lead">Первые словари создавались на&nbsp;глиняных табличках: шумеры записывали значения слов, чтобы понимать друг друга в&nbsp;торговле и&nbsp;дипломатии.</p>
+        <p class="lead lead--dim">Это произошло почти 4500&nbsp;лет назад.</p>
+        <aside class="callout"><b>Идея словаря старше алфавита!</b> Сначала появился смысл, потом буквы.</aside>
+        <ul class="stats">
+          <li class="stat"><span class="stat__v">≈4500</span><span class="stat__l">лет назад</span></li>
+          <li class="stat"><span class="stat__v">торговля</span><span class="stat__l">и дипломатия</span></li>
+          <li class="stat"><span class="stat__v">глина</span><span class="stat__l">носитель знания</span></li>
+        </ul>
+      </div>
+
+      <div class="visual">
+        <div class="tablet">
+          <div class="tablet__inner" aria-hidden="true">
+            <span class="row"><i class="w"></i><i class="v"></i><i class="w"></i><i class="w"></i><i class="v"></i><i class="w"></i><i class="w"></i><i class="v"></i></span>
+            <span class="row"><i class="w"></i><i class="w"></i><i class="v"></i><i class="w"></i><i class="v"></i><i class="w"></i><i class="w"></i><i class="w"></i></span>
+            <span class="row"><i class="v"></i><i class="w"></i><i class="w"></i><i class="v"></i><i class="w"></i><i class="w"></i><i class="v"></i><i class="w"></i></span>
+            <span class="row"><i class="w"></i><i class="v"></i><i class="w"></i><i class="w"></i><i class="w"></i><i class="v"></i><i class="w"></i><i class="w"></i></span>
+            <span class="row"><i class="w"></i><i class="w"></i><i class="v"></i><i class="w"></i><i class="w"></i><i class="v"></i><i class="w"></i><i class="v"></i></span>
+          </div>
+          <span class="tablet__crack" aria-hidden="true"></span>
+        </div>
+        <p class="caption">Клинопись: выдавленные значки-слова. Так выглядел прообраз глоссария.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="slide slide--rome" id="s2">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">02</span>
+        <span class="era">Рим · 77 год н.&nbsp;э.</span>
+        <h2 class="title">Плиний Старший<br>и слово «энциклопедия»</h2>
+      </header>
+
+      <div class="prose">
+        <p class="lead">В&nbsp;77&nbsp;году римлянин Плиний Старший собрал <b>37&nbsp;книг обо всём на&nbsp;свете</b> — «Естественную историю».</p>
+        <p class="lead lead--dim">Он назвал свой труд греческим словом, означавшим «всестороннее обучение», — именно отсюда родилось слово «энциклопедия».</p>
+
+        <div class="etym" aria-label="Происхождение слова">
+          <span class="etym__gr">ἐγκύκλιος παιδεία</span>
+          <span class="etym__arrow" aria-hidden="true">→</span>
+          <span class="etym__ru">«всестороннее&nbsp;обучение»</span>
+          <span class="etym__arrow" aria-hidden="true">→</span>
+          <span class="etym__out">энциклопедия</span>
+        </div>
+      </div>
+
+      <div class="visual">
+        <div class="shelf" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <ul class="stats stats--stack">
+          <li class="stat"><span class="stat__v">37</span><span class="stat__l">книг в «Естественной истории»</span></li>
+          <li class="stat"><span class="stat__v">77</span><span class="stat__l">год издания</span></li>
+          <li class="stat"><span class="stat__v">≈2000</span><span class="stat__l">лет слову «энциклопедия»</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="slide slide--china" id="s3">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">03</span>
+        <span class="era">Китай · 1408</span>
+        <h2 class="title">Китайский рекорд:<br>«Энциклопедия Юнлэ»</h2>
+      </header>
+
+      <div class="prose">
+        <p class="lead">В&nbsp;1408&nbsp;году <b>2000&nbsp;китайских учёных</b> завершили гигантский труд: 11&nbsp;095&nbsp;томов, в&nbsp;которых использовано 370&nbsp;миллионов иероглифов.</p>
+        <p class="lead lead--dim">«Энциклопедия Юнлэ» — самая большая бумажная энциклопедия в&nbsp;истории. Увы, до&nbsp;нас дошло лишь&nbsp;4% текста.</p>
+
+        <div class="survive" role="img" aria-label="До нас дошло 4 процента текста">
+          <span class="survive__label">дошло до наших дней</span>
+          <span class="survive__bar"><span class="survive__lost"></span><span class="survive__kept">4%</span></span>
+          <span class="survive__note">96% утрачено</span>
+        </div>
+      </div>
+
+      <div class="visual visual--big">
+        <div class="bigstat">
+          <span class="bigstat__v">11&nbsp;095</span>
+          <span class="bigstat__l">томов</span>
+        </div>
+        <div class="bigstat">
+          <span class="bigstat__v">370&nbsp;000&nbsp;000</span>
+          <span class="bigstat__l">иероглифов</span>
+        </div>
+        <div class="seal" aria-hidden="true"><span>1408</span><b>2000 учёных</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="slide slide--france" id="s4">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">04</span>
+        <span class="era">Франция · 1751</span>
+        <h2 class="title">«Энциклопедия» Дидро:<br>издание как шпионский&nbsp;роман</h2>
+      </header>
+
+      <div class="prose">
+        <blockquote class="pull">Книгу запрещали,<br>а&nbsp;рукописи жгли</blockquote>
+        <p class="lead">В&nbsp;1751&nbsp;году во Франции вышел первый том «Энциклопедии» Дидро и&nbsp;Д’Аламбера — <b>35&nbsp;томов, 71&nbsp;818&nbsp;статей</b>. Церковь её запрещала, цензоры изымали материалы.</p>
+        <p class="lead lead--dim">И&nbsp;всё&nbsp;равно издание вышло — и&nbsp;стало символом Просвещения.</p>
+        <div class="censor" aria-hidden="true"><i class="stamp">DÉFENDU</i><span class="barred">статью изъяли</span></div>
+      </div>
+
+      <div class="visual">
+        <div class="stack" aria-hidden="true">
+          <b>35</b>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <ul class="stats stats--stack">
+          <li class="stat"><span class="stat__v">71&nbsp;818</span><span class="stat__l">статей</span></li>
+          <li class="stat"><span class="stat__v">35</span><span class="stat__l">томов текста и таблиц</span></li>
+          <li class="stat"><span class="stat__v">1751</span><span class="stat__l">первый том назло цензуре</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="slide slide--victorian" id="s5">
+    <div class="frame frame--wide">
+      <header class="head">
+        <span class="idx" aria-hidden="true">05</span>
+        <span class="era">XIX век</span>
+        <h2 class="title">Эпоха гигантов</h2>
+      </header>
+
+      <p class="lead lead--narrow">В&nbsp;XIX&nbsp;веке вышли сразу четыре проекта, которые задали стандарты на&nbsp;двести&nbsp;лет вперёд — разные страны, один принцип: знание должно быть проверено и&nbsp;систематизировано.</p>
+
+      <div class="grid4">
+        <article class="card">
+          <span class="card__no">Ⅰ</span>
+          <h3 class="card__t">«Британника»</h3>
+          <p class="card__d">Знаменитая шотландская энциклопедия — эталон академичности.</p>
+          <span class="card__tag">Шотландия</span>
+        </article>
+        <article class="card">
+          <span class="card__no">Ⅱ</span>
+          <h3 class="card__t">Словарь Вебстера</h3>
+          <p class="card__d">Труд «отца» американского правописания: язык отдельной страны.</p>
+          <span class="card__tag">США</span>
+        </article>
+        <article class="card">
+          <span class="card__no">Ⅲ</span>
+          <h3 class="card__t">Оксфордский словарь</h3>
+          <p class="card__d">Собран при участии волонтёров со&nbsp;всего мира — краудсорсинг до&nbsp;интернета.</p>
+          <span class="card__tag">Великобритания</span>
+        </article>
+        <article class="card card--key">
+          <span class="card__no">Ⅳ</span>
+          <h3 class="card__t">Энциклопедия Брокгауза</h3>
+          <p class="card__d">Модель «короткие статьи + много фактов» — её позже использовали многие издатели.</p>
+          <span class="card__tag">модель для подражания</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="slide slide--guinness" id="s6">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">06</span>
+        <span class="era">1955 → 2001</span>
+        <h2 class="title">Эпоха Гиннесса<br>и Википедии</h2>
+      </header>
+
+      <div class="prose">
+        <p class="lead">В&nbsp;1955&nbsp;году из&nbsp;спора директора пивоварни — <b>что быстрее, гусь или ржанка</b> — родилась «Книга рекордов Гиннесса».</p>
+        <p class="lead lead--dim">А&nbsp;в&nbsp;2001&nbsp;году появилась Википедия — первая энциклопедия, которую может редактировать каждый. Сегодня это самый большой свод знаний в&nbsp;истории человечества.</p>
+
+        <div class="race" aria-hidden="true">
+          <div class="race__lane race__lane--a"><span class="runner runner--goose"><i class="bd"></i><i class="nk"></i><i class="wg"></i></span><em>гусь</em></div>
+          <div class="race__lane race__lane--b"><span class="runner runner--plover"><i class="bd"></i><i class="nk"></i><i class="wg"></i></span><em>ржанка</em></div>
+          <span class="race__flag" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="visual">
+        <div class="wiki">
+          <span class="wiki__globe" aria-hidden="true"><i></i><b></b><u></u></span>
+          <span class="wiki__w">W</span>
+        </div>
+        <ul class="stats stats--stack">
+          <li class="stat"><span class="stat__v">1955</span><span class="stat__l">спор, из которого вырос Гиннесс</span></li>
+          <li class="stat"><span class="stat__v">2001</span><span class="stat__l">редактировать может каждый</span></li>
+          <li class="stat"><span class="stat__v">№&nbsp;1</span><span class="stat__l">свод знаний в истории</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="slide slide--rus" id="s7">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">07</span>
+        <span class="era">Русь · 1272</span>
+        <h2 class="title">Азбуковники:<br>словарь до&nbsp;словаря</h2>
+      </header>
+
+      <div class="prose">
+        <blockquote class="pull">Первая подсказка —<br>на&nbsp;полях рукописи</blockquote>
+        <p class="lead">Настоящих словарей на&nbsp;Руси ещё не&nbsp;было, зато были <b>азбуковники</b> — рукописные сборники, где объясняли непонятные слова, имена святых и&nbsp;даже драгоценные камни.</p>
+        <p class="lead lead--dim">Самый ранний из&nbsp;дошедших датируется 1272&nbsp;годом и&nbsp;объясняет всего 174&nbsp;слова.</p>
+        <ul class="chips">
+          <li class="chip">непонятные слова</li>
+          <li class="chip">имена святых</li>
+          <li class="chip">драгоценные камни</li>
+        </ul>
+      </div>
+
+      <div class="visual">
+        <div class="gloss">
+          <div class="gloss__page" aria-hidden="true">
+            <span class="gloss__rule"></span>
+            <span class="gloss__rule w80"></span>
+            <span class="gloss__rule w65"></span>
+            <span class="gloss__margin">азъ буки ведѣ<br>…глаголет слово</span>
+            <span class="gloss__rule w90"></span>
+            <span class="gloss__rule w55"></span>
+          </div>
+          <div class="wordgrid" role="img" aria-label="174 объяснённых слова">
+            <span class="wordgrid__count">174<small>слова · 1272&nbsp;год</small></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="slide slide--dashkova" id="s8">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">08</span>
+        <span class="era">Российская империя · екатерининская эпоха</span>
+        <h2 class="title">Екатерина Дашкова<br>и «Словарь Академии Российской»</h2>
+      </header>
+
+      <div class="prose">
+        <p class="lead">Первая настоящая русская энциклопедия слова родилась при&nbsp;Екатерине&nbsp;II. Её подруга и&nbsp;первый президент Российской академии княгиня Дашкова привлекла к&nbsp;работе над словарём лучших людей эпохи.</p>
+        <ul class="stats">
+          <li class="stat"><span class="stat__v">35</span><span class="stat__l">академиков</span></li>
+          <li class="stat"><span class="stat__v">43&nbsp;257</span><span class="stat__l">слов</span></li>
+          <li class="stat"><span class="stat__v">6</span><span class="stat__l">томов</span></li>
+        </ul>
+        <p class="lead lead--dim">Плюс писатели и&nbsp;государственные деятели — и&nbsp;золотые медали создателям.</p>
+      </div>
+
+      <div class="visual">
+        <div class="medal" aria-hidden="true">
+          <span class="medal__ribbon"></span>
+          <span class="medal__disc"><i>СЛОВО</i></span>
+        </div>
+        <blockquote class="medal__quote">«Российскому слову<br>отличную пользу принесшему»</blockquote>
+        <div class="vols vols--6" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section class="slide slide--dal" id="s9">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">09</span>
+        <span class="era">Владимир Даль · 1819 →</span>
+        <h2 class="title">Сокровища России<br>в&nbsp;словах</h2>
+      </header>
+
+      <div class="prose">
+        <div class="heardword">
+          <span class="heardword__w">замолодело</span>
+          <span class="heardword__note">1819 · Новгородская губерния · записал 18-летний гардемарин Даль</span>
+        </div>
+        <p class="lead">Полвека жизни Даль посвятил одному делу — собиранию слов. При этом филологического образования у&nbsp;него не&nbsp;было: Даль был <b>самоучкой</b>.</p>
+        <p class="lead lead--dim">Результат — 4&nbsp;тома толкового словаря с&nbsp;диалектами, ремесленной лексикой и&nbsp;приметами.</p>
+        <ul class="chips">
+          <li class="chip">диалекты</li>
+          <li class="chip">ремесленная лексика</li>
+          <li class="chip">приметы</li>
+          <li class="chip">пословицы</li>
+        </ul>
+      </div>
+
+      <div class="visual">
+        <ul class="stats stats--stack">
+          <li class="stat stat--xl"><span class="stat__v">200&nbsp;000</span><span class="stat__l">слов в словаре Даля</span></li>
+          <li class="stat"><span class="stat__v">30&nbsp;000</span><span class="stat__l">пословиц и&nbsp;поговорок</span></li>
+          <li class="stat"><span class="stat__v">50&nbsp;лет</span><span class="stat__l">одному делу</span></li>
+          <li class="stat"><span class="stat__v">4&nbsp;тома</span><span class="stat__l">толкового словаря</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="slide slide--brokgauz" id="s10">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">10</span>
+        <span class="era">Российская империя · конец XIX века</span>
+        <h2 class="title">Энциклопедии<br>с&nbsp;трудной судьбой</h2>
+      </header>
+
+      <div class="prose">
+        <p class="lead">С&nbsp;энциклопедиями в&nbsp;России долго не&nbsp;везло. Многие издания запрещались, закрывались, критиковались — но&nbsp;не&nbsp;сдавались!</p>
+        <p class="lead lead--dim">И&nbsp;вот в&nbsp;конце XIX&nbsp;века появился энциклопедический словарь «Брокгауз и&nbsp;Ефрон» — вершина дореволюционной энциклопедистики.</p>
+        <div class="spines" role="img" aria-label="82 полутома">
+          <span class="spines__bar" aria-hidden="true"></span>
+          <span class="spines__count">82 полутома</span>
+        </div>
+        <ul class="chips">
+          <li class="chip chip--ban">запрещали</li>
+          <li class="chip chip--ban">закрывали</li>
+          <li class="chip chip--ban">критиковали</li>
+          <li class="chip chip--ok">не сдавались</li>
+        </ul>
+      </div>
+
+      <div class="visual">
+        <ul class="stats stats--stack">
+          <li class="stat"><span class="stat__v">7800</span><span class="stat__l">иллюстраций</span></li>
+          <li class="stat"><span class="stat__v">235</span><span class="stat__l">карт</span></li>
+          <li class="stat"><span class="stat__v">82</span><span class="stat__l">полутома</span></li>
+        </ul>
+        <div class="mapline" aria-hidden="true"><span class="mapline__grid"></span><span class="mapline__pin"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="slide slide--soviet" id="s11">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">11</span>
+        <span class="era">СССР · 1935 — 1949</span>
+        <h2 class="title">Ушаков и&nbsp;Ожегов</h2>
+      </header>
+
+      <div class="prose">
+        <p class="lead">В&nbsp;1935–1940&nbsp;годах под руководством <b>Дмитрия Ушакова</b> вышли 4&nbsp;тома — 85&nbsp;289&nbsp;слов.</p>
+        <p class="lead lead--dim">А&nbsp;в&nbsp;1949-м <b>Ожегов</b> выпустил свой однотомник — тот самый, который переиздавался больше 26&nbsp;раз и&nbsp;стал в&nbsp;буквальном смысле «настольной книгой» для многих поколений.</p>
+        <div class="reprints" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b>26+</b></div>
+      </div>
+
+      <div class="visual">
+        <div class="construct">
+          <div class="construct__row"><span>УШАКОВ</span><b>1935–1940</b></div>
+          <ul class="stats stats--stack stats--onred">
+            <li class="stat"><span class="stat__v">4&nbsp;тома</span><span class="stat__l">словаря Ушакова</span></li>
+            <li class="stat"><span class="stat__v">85&nbsp;289</span><span class="stat__l">слов</span></li>
+            <li class="stat"><span class="stat__v">ОЖЕГОВ</span><span class="stat__l">1949 · однотомник · 26+ изданий</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="slide slide--bse" id="s12">
+    <div class="frame">
+      <header class="head">
+        <span class="idx" aria-hidden="true">12</span>
+        <span class="era">СССР · БСЭ</span>
+        <h2 class="title">Энциклопедия-<br>рекордсмен</h2>
+      </header>
+
+      <div class="prose">
+        <p class="lead">«Большая советская энциклопедия» — идея академика и&nbsp;полярника <b>Отто Шмидта</b>. Она стала самым масштабным энциклопедическим проектом страны.</p>
+        <p class="lead lead--dim">До&nbsp;сих пор БСЭ заслуженно остаётся самым авторитетным справочным изданием в&nbsp;библиотеках России.</p>
+        <div class="orbit" aria-hidden="true">
+          <span class="orbit__core">БСЭ</span>
+          <span class="orbit__ring orbit__ring--1"></span>
+          <span class="orbit__ring orbit__ring--2"></span>
+          <i class="orbit__sat"></i>
+        </div>
+      </div>
+
+      <div class="visual visual--big">
+        <div class="bigstat bigstat--cool">
+          <span class="bigstat__v">15&nbsp;820</span>
+          <span class="bigstat__l">авторов</span>
+        </div>
+        <div class="bigstat bigstat--cool">
+          <span class="bigstat__v">44</span>
+          <span class="bigstat__l">страны</span>
+        </div>
+        <p class="caption">Кто только не&nbsp;писал статьи: учёные, лётчики, полярники, врачи.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="slide slide--bre" id="s13">
+    <div class="frame frame--wide">
+      <header class="head">
+        <span class="idx" aria-hidden="true">13</span>
+        <span class="era">Россия · с 2005 года</span>
+        <h2 class="title">Большая российская<br>энциклопедия</h2>
+      </header>
+
+      <p class="lead lead--narrow">С&nbsp;2005&nbsp;года выходит преемница БСЭ — <b>БРЭ</b>, последний большой бумажный энциклопедический проект России. Её объём — 36&nbsp;томов. Дальше цифровая эра: знания переезжают на&nbsp;экраны.</p>
+
+      <div class="bridge" aria-hidden="true">
+        <span class="bridge__books"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="bridge__arrow">→</span>
+        <span class="bridge__screen"><em>БРЭ</em><b>online</b></span>
+      </div>
+
+      <aside class="callout callout--big">Правило остаётся тем&nbsp;же, что во&nbsp;времена Дашковой: <b>точность, проверки и&nbsp;уважение к&nbsp;слову</b>.</aside>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="slide slide--end" id="s14">
+    <div class="frame frame--wide">
+      <header class="head head--center">
+        <span class="era">одна линия · 4500 лет</span>
+        <h2 class="title title--center">Знания меняли форму,<br>но&nbsp;не&nbsp;смысл</h2>
+      </header>
+
+      <div class="timeline" aria-label="Хронология">
+        <span class="timeline__item"><b>≈2500&nbsp;до&nbsp;н.&nbsp;э.</b>глиняные таблички</span>
+        <span class="timeline__item"><b>77</b>Плиний, 37&nbsp;книг</span>
+        <span class="timeline__item"><b>1272</b>азбуковник, 174&nbsp;слова</span>
+        <span class="timeline__item"><b>1408</b>Юнлэ, 11&nbsp;095&nbsp;томов</span>
+        <span class="timeline__item"><b>1751</b>Дидро, 71&nbsp;818&nbsp;статей</span>
+        <span class="timeline__item"><b>XIX</b>Британника · Вебстер · Оксфорд · Брокгауз</span>
+        <span class="timeline__item"><b>1819</b>Даль записывает «замолодело»</span>
+        <span class="timeline__item"><b>1935</b>Ушаков, 85&nbsp;289&nbsp;слов</span>
+        <span class="timeline__item"><b>1949</b>Ожегов, 26+ изданий</span>
+        <span class="timeline__item"><b>1955</b>Гиннесс из&nbsp;спора о&nbsp;гусе</span>
+        <span class="timeline__item"><b>2001</b>Википедия</span>
+        <span class="timeline__item"><b>2005</b>БРЭ, 36&nbsp;томов</span>
+      </div>
+
+      <p class="finale">Сначала понять друг друга.<br>Потом — всего мира.</p>
+      <p class="thanks">спасибо за внимание · <a href="#top">в начало</a></p>
+    </div>
+  </section>
+
+</main>
+
+<div class="progress" aria-hidden="true"><span data-progress></span></div>
+
+<a class="next" href="#s1" data-next aria-label="Следующий слайд">→</a>
+
+</body>
+</html>
