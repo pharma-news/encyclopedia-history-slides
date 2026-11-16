@@ -480,3 +480,217 @@
   .vols { height: calc(var(--s) * 3.8); }
   .tiles--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+/* ============================================================
+   DESIGN SYSTEM 2.0
+   Более цельный визуальный язык: свет, глубина, ритм, микродвижение.
+   Правила идут после базовых и усиливают существующую разметку.
+   ============================================================ */
+
+:root {
+  --glass: rgba(246, 241, 231, 0.055);
+  --glass-2: rgba(246, 241, 231, 0.1);
+  --edge: color-mix(in srgb, var(--acc) 26%, rgba(246, 241, 231, 0.14));
+  --halo: color-mix(in srgb, var(--acc) 34%, transparent);
+  --shadow-1: 0 calc(var(--s) * 0.7) calc(var(--s) * 2) rgba(0, 0, 0, 0.36);
+  --shadow-2: 0 calc(var(--s) * 1.5) calc(var(--s) * 4.2) rgba(0, 0, 0, 0.6);
+}
+
+/* Более точные, менее «пёстрые» эпохальные акценты */
+.slide--cover     { --acc: #eab26a; --acc-2: #c96a3d; }
+.slide--clay      { --acc: #d8a06d; --acc-2: #8f5a37; }
+.slide--rome      { --acc: #e7c98a; --acc-2: #a3772c; }
+.slide--china     { --acc: #e65a4d; --acc-2: #8f2a28; }
+.slide--france    { --acc: #e9d5a4; --acc-2: #7f92bb; }
+.slide--victorian { --acc: #c8a87e; --acc-2: #556582; }
+.slide--guinness  { --acc: #e4573f; --acc-2: #3a86c9; }
+.slide--rus       { --acc: #cfa75f; --acc-2: #6f4626; }
+.slide--dashkova  { --acc: #e9c96d; --acc-2: #48769f; }
+.slide--dal       { --acc: #dc9a66; --acc-2: #64452a; }
+.slide--brokgauz  { --acc: #b6c5d5; --acc-2: #74553b; }
+.slide--soviet    { --acc: #e03c3c; --acc-2: #d19d3d; }
+.slide--bse       { --acc: #7fb2ff; --acc-2: #23507d; }
+.slide--bre       { --acc: #63c8d6; --acc-2: #d9544c; }
+.slide--end       { --acc: #f0e0c1; --acc-2: #dfa459; }
+
+/* Фон слайда: один главный свет + один контровой */
+.slide::after {
+  background:
+    radial-gradient(46% 38% at 78% 10%, var(--halo), transparent 68%),
+    radial-gradient(38% 34% at 10% 88%, color-mix(in srgb, var(--acc-2) 26%, transparent), transparent 70%);
+  opacity: 0.48;
+  filter: blur(calc(var(--s) * 2.4));
+}
+
+/* «Витрина»: стекло, внутренняя кромка, угловые метки */
+.stage {
+  padding: calc(var(--s) * 1.45) calc(var(--s) * 1.55);
+  border: 1px solid var(--edge);
+  background:
+    radial-gradient(120% 90% at 74% 0%, color-mix(in srgb, var(--acc) 15%, transparent), transparent 58%),
+    linear-gradient(158deg, var(--glass-2), rgba(246, 241, 231, 0.012) 64%),
+    rgba(8, 7, 13, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(246, 241, 231, 0.09),
+    inset 0 0 0 1px rgba(246, 241, 231, 0.03),
+    var(--shadow-2);
+}
+.stage::before {
+  height: 3px;
+  background: linear-gradient(90deg, var(--acc), color-mix(in srgb, var(--acc) 18%, transparent) 68%, transparent);
+  opacity: 0.9;
+}
+.stage::after {
+  inset: auto calc(var(--s) * 1.1) calc(var(--s) * -0.6) calc(var(--s) * 1.1);
+  height: calc(var(--s) * 1.3);
+  background: radial-gradient(50% 50% at 50% 50%, var(--halo), transparent 74%);
+  filter: blur(calc(var(--s) * 1));
+  opacity: 0.5;
+}
+.stage:hover { transform: translateY(calc(var(--s) * -0.3)) scale(1.008); }
+
+/* Иллюстрации: больше «предметности» */
+.art { filter: drop-shadow(0 calc(var(--s) * 0.65) calc(var(--s) * 1.8) rgba(0, 0, 0, 0.5)); }
+.cap {
+  border-left: 2px solid color-mix(in srgb, var(--acc) 42%, transparent);
+  padding-left: calc(var(--s) * 0.6);
+  color: rgba(246, 241, 231, 0.72);
+}
+
+/* Цифры: главный акцент композиции */
+.tiles { border-top-color: color-mix(in srgb, var(--acc) 30%, transparent); }
+.tile b {
+  color: #fff;
+  font-size: calc(var(--fs-stat) * 1.06);
+  text-shadow: 0 0 calc(var(--s) * 1.7) var(--halo);
+}
+.tile span { color: rgba(246, 241, 231, 0.68); }
+.tile::after {
+  content: "";
+  position: absolute;
+  left: 0; right: auto; bottom: calc(var(--s) * -0.3);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--acc), transparent);
+  transition: width 0.45s var(--ease);
+}
+.tile { position: relative; }
+.tile:hover::after { width: 72%; }
+
+/* Титул: кинематографичный герой */
+.cover__mark { opacity: 0.34; }
+.cover__glyph { filter: drop-shadow(0 calc(var(--s) * 1.4) calc(var(--s) * 3.4) rgba(0, 0, 0, 0.55)); }
+.cover__title { text-shadow: 0 calc(var(--s) * 0.2) calc(var(--s) * 1.6) rgba(0, 0, 0, 0.6); }
+.cover__line--wiki {
+  background: linear-gradient(96deg, #ffd479, #ff8f6b 34%, #7fc8ff 72%, #c9f5e6);
+  background-size: 220% 100%;
+  animation-duration: 11s;
+}
+.rail__item {
+  background: linear-gradient(165deg, var(--glass-2), rgba(246, 241, 231, 0.015));
+  box-shadow: var(--shadow-1);
+}
+
+/* 01 · Глина: живая фактура */
+.slide--clay .stage::after { opacity: 0.6; }
+.slide--clay .art { animation: clay-breathe 9s var(--ease) infinite alternate; }
+@keyframes clay-breathe { to { transform: perspective(1200px) rotateY(-7deg) rotateX(3deg) translateY(calc(var(--s) * -0.2)); } }
+.slide--clay .signs { filter: drop-shadow(0 1px 0 rgba(255, 235, 205, 0.22)); }
+
+/* 02 · Плиний: колесо как главный объект */
+.wheel { width: min(100%, calc(var(--s) * 20)); }
+.wheel__ring { opacity: 0.95; filter: drop-shadow(0 0 calc(var(--s) * 1.6) var(--halo)); }
+.wheel__core b { color: #fff; text-shadow: 0 0 calc(var(--s) * 2) var(--halo); }
+.wheel::after { border-color: color-mix(in srgb, var(--acc) 38%, transparent); }
+.etym { background: linear-gradient(120deg, color-mix(in srgb, var(--acc) 14%, transparent), rgba(246, 241, 231, 0.03)); border-style: solid; box-shadow: var(--shadow-1); }
+
+/* 03 · Юнлэ: драматичная стена томов */
+.wall__lost { box-shadow: inset 0 0 0 1px rgba(246, 241, 231, 0.14), inset 0 calc(var(--s) * -0.7) calc(var(--s) * 1.6) rgba(0, 0, 0, 0.55); }
+.wall__kept { box-shadow: 0 0 calc(var(--s) * 2) rgba(232, 86, 74, 0.75); }
+.glyphs i { animation-duration: 4.6s; }
+.seal { box-shadow: 0 0 0 1px rgba(232, 86, 74, 0.3), inset 0 0 calc(var(--s) * 1.2) rgba(232, 86, 74, 0.4), var(--shadow-1); }
+
+/* 04 · Дидро: гравюра и красный штамп */
+.stage--plate { background: linear-gradient(160deg, rgba(236, 215, 166, 0.16), rgba(246, 241, 231, 0.015)); }
+.plate__word { fill: #5f4a30; letter-spacing: 0.22em; }
+.stamp { filter: drop-shadow(0 0 calc(var(--s) * 0.7) rgba(210, 56, 42, 0.45)); }
+.meter__field { opacity: 0.9; }
+
+/* 05 · XIX век: карточки как музейные экспонаты */
+.card {
+  border-color: var(--edge);
+  background:
+    radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--acc) 12%, transparent), transparent 58%),
+    linear-gradient(165deg, var(--glass-2), rgba(246, 241, 231, 0.012));
+  box-shadow: var(--shadow-1);
+}
+.card:hover { transform: translateY(calc(var(--s) * -0.4)) scale(1.012); }
+.card__art { filter: drop-shadow(0 calc(var(--s) * 0.3) calc(var(--s) * 0.8) rgba(0, 0, 0, 0.4)); }
+.card__t { color: #fff; }
+.card__d { color: rgba(246, 241, 231, 0.7); }
+.principle { background: linear-gradient(165deg, var(--glass), rgba(246, 241, 231, 0.012)); }
+
+/* 06 · Гиннесс и Википедия */
+.race { border-color: color-mix(in srgb, var(--acc) 22%, transparent); box-shadow: var(--shadow-1); }
+.race__svg { filter: drop-shadow(0 calc(var(--s) * 0.4) calc(var(--s) * 1.2) rgba(0, 0, 0, 0.4)); }
+.wiki__svg { filter: drop-shadow(0 calc(var(--s) * 0.7) calc(var(--s) * 2) rgba(61, 143, 209, 0.45)); }
+
+/* 07 · Азбуковник: рукописная страница */
+.stage--folio { background: linear-gradient(160deg, rgba(207, 167, 95, 0.16), rgba(246, 241, 231, 0.015)); }
+.folio__entry text, .folio__margin text { filter: drop-shadow(0 1px 0 rgba(255, 240, 210, 0.14)); }
+
+/* 08 · Дашкова: золото и имперская глубина */
+.stage--imperial { background: linear-gradient(160deg, rgba(234, 201, 107, 0.18), rgba(79, 127, 168, 0.12)); }
+.medal__disc, .vols i { filter: drop-shadow(0 calc(var(--s) * 0.4) calc(var(--s) * 1.2) rgba(0, 0, 0, 0.45)); }
+.vols i::before { box-shadow: 0 calc(var(--s) * 0.6) 0 rgba(234, 201, 107, 0.85); }
+
+/* 09 · Даль: словарная карточка */
+.stage--entry { background: linear-gradient(160deg, rgba(221, 154, 99, 0.16), rgba(246, 241, 231, 0.015)); }
+.entry { box-shadow: 0 calc(var(--s) * 0.8) calc(var(--s) * 2.2) rgba(0, 0, 0, 0.55); }
+.heardword__w { text-shadow: 0 0 calc(var(--s) * 2.2) var(--halo); }
+
+/* 10 · Брокгауз и Ефрон: библиотечный каталог */
+.stage--catalog { background: linear-gradient(160deg, rgba(183, 198, 214, 0.16), rgba(246, 241, 231, 0.015)); }
+.spines__row { box-shadow: inset 0 0 0 1px rgba(246, 241, 231, 0.14), inset 0 calc(var(--s) * -0.6) calc(var(--s) * 1.4) rgba(0, 0, 0, 0.5); }
+.pict__box { background: rgba(9, 9, 14, 0.6); box-shadow: var(--shadow-1); }
+
+/* 11 · Ушаков и Ожегов: плакат */
+.stage--poster { background: linear-gradient(160deg, rgba(182, 35, 35, 0.28), rgba(246, 241, 231, 0.015)); }
+.poster__huge { filter: drop-shadow(0 0 calc(var(--s) * 1) rgba(255, 217, 138, 0.5)); }
+
+/* 12 · БСЭ: орбита знаний */
+.stage--authors { background: linear-gradient(160deg, rgba(127, 178, 255, 0.18), rgba(246, 241, 231, 0.015)); }
+.authors { box-shadow: inset 0 0 0 1px rgba(246, 241, 231, 0.06), var(--shadow-1); }
+.authors__dots { filter: drop-shadow(0 0 calc(var(--s) * 1.2) rgba(127, 178, 255, 0.55)); }
+.authors b { color: #e6f1ff; text-shadow: 0 0 calc(var(--s) * 2.2) rgba(127, 178, 255, 0.55); }
+
+/* 13 · БРЭ: бумага становится экраном */
+.bridge__books { filter: drop-shadow(0 calc(var(--s) * 0.4) calc(var(--s) * 1) rgba(0, 0, 0, 0.5)); }
+.bridge__screen rect:first-child { filter: drop-shadow(0 0 calc(var(--s) * 1.4) rgba(99, 200, 214, 0.5)); }
+
+/* Финал: хронология как светящаяся лента */
+.timeline__item {
+  border-color: var(--edge);
+  background: linear-gradient(165deg, var(--glass-2), rgba(246, 241, 231, 0.012));
+  box-shadow: var(--shadow-1);
+}
+.timeline__item b { color: #fff; text-shadow: 0 0 calc(var(--s) * 1.4) var(--halo); }
+.timeline__item:hover { transform: translateY(calc(var(--s) * -0.35)) scale(1.02); }
+
+/* Микродвижение: очень сдержанное */
+@keyframes halo-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(var(--s) * -0.35)); }
+}
+.stage .art { animation: halo-float 8s var(--ease) infinite alternate; }
+.slide--clay .art { animation: clay-breathe 9s var(--ease) infinite alternate; }
+
+/* Печать и reduced motion */
+@media print {
+  .stage, .card, .timeline__item { box-shadow: none; background: #fbf8f2; border-color: #d7d0c4; }
+  .art, .stage .art { filter: none; animation: none; }
+  .tile b, .timeline__item b, .wheel__core b { color: #171420; text-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage .art, .slide--clay .art, .wheel__ring, .glyphs i, .authors__ring, .authors__dots { animation: none !important; }
+}
