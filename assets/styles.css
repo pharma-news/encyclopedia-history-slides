@@ -104,6 +104,81 @@ svg { display: block; }
   filter: blur(calc(var(--s) * 2.2));
   opacity: 0.8;
   transition: background 0.9s var(--ease), opacity 0.9s var(--ease);
+  animation: aurora-breathe 54s var(--ease) infinite alternate;
+}
+@keyframes aurora-breathe {
+  from { transform: translate3d(-1.6%, -1.2%, 0) scale(1.06); }
+  to   { transform: translate3d(2.2%, 1.6%, 0) scale(1.18); }
+}
+
+/* ---------- фоновая взвесь: буквы, книги, листочки ----------
+   слой лежит там же, где aurora (под слайдами), поэтому фон слайда
+   приглушает его примерно до 5-8% — ровно настолько, чтобы фон «дышал»
+   и не отвлекал от текста. цвет слой берёт текущей эпохи: --acc на root
+   меняет deck.js, а на телефоне и в reduce-режиме слой почти исчезает */
+.motes {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: var(--acc);
+  filter: blur(calc(var(--s) * 0.045));
+  transition: color 1.4s var(--ease);
+  /* --boost: насколько ярче нужно слою, чтобы он вообще читался
+     сквозь полупрозрачный фон слайда (фон забирает ~90% яркости) */
+  --boost: 1.85;
+}
+.mote {
+  position: absolute;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  opacity: min(1, calc(var(--o, .5) * var(--boost)));
+  animation:
+    mote-drift var(--dur, 80s) var(--ease) var(--dl, 0s) infinite alternate,
+    mote-fade calc(var(--dur, 80s) * .55) var(--ease) var(--dl, 0s) infinite alternate;
+}
+.mote--glyph {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: calc(var(--s) * var(--sz, 7));
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.mote--icon svg {
+  width: calc(var(--s) * var(--sz, 7));
+  height: calc(var(--s) * var(--sz, 7));
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mote--dot {
+  width: calc(var(--s) * var(--sz, .5));
+  height: calc(var(--s) * var(--sz, .5));
+  border-radius: 50%;
+  background: currentColor;
+}
+@keyframes mote-drift {
+  from { transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)); }
+  to   { transform: translate3d(calc(var(--s) * var(--mx, 4)), calc(var(--s) * var(--my, -8)), 0)
+                      rotate(calc(var(--rot, 0deg) + var(--mr, 9deg))); }
+}
+@keyframes mote-fade {
+  from { opacity: min(1, calc(var(--o, .5) * var(--boost) * .5)); }
+  to   { opacity: min(1, calc(var(--o, .5) * var(--boost))); }
+}
+/* глубина: слой чуть едет вместе с прокруткой (там, где есть scroll-driven animations) */
+@supports (animation-timeline: scroll(root)) {
+  .motes {
+    animation: motes-parallax linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes motes-parallax {
+    from { transform: translate3d(0, calc(var(--s) * -5), 0); }
+    to   { transform: translate3d(0, calc(var(--s) * 5), 0); }
+  }
 }
 
 /* ---------- верхняя панель ---------- */
@@ -781,6 +856,9 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; scroll-snap-type: none; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  /* фон перестаёт дышать, но не исчезает: взвесь просто замирает на своих местах */
+  .aurora, .motes, .mote { animation: none !important; }
+  .mote { opacity: min(1, calc(var(--o, .5) * var(--boost) * .8)); }
 }
 
 /* ---------- телефон: дек превращается в аккуратный вертикальный текст ---------- */
@@ -819,6 +897,8 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   .marquee { bottom: calc(var(--s) * 2.6); }
   .rail { bottom: calc(var(--s) * 5.2); }
   .scrollcue { display: none; }
+  /* на телефоне фоновая взвесь всё равно почти не читается — оставляем половину */
+  .mote:nth-child(2n) { display: none; }
   .grid4, .frame--wide2 .grid4 { grid-template-columns: minmax(0, 1fr); }
   .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .finale { font-size: calc(var(--s) * 1.6); }
@@ -829,7 +909,7 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   :root { --s: 9mm; }
   html { scroll-snap-type: none; }
   body { background: #fff; color: #14121a; }
-  .grain, .aurora, .dots, .next, .progress, .topbar__nav, .rail, .marquee { display: none; }
+  .grain, .aurora, .motes, .dots, .next, .progress, .topbar__nav, .rail, .marquee { display: none; }
   .topbar { position: static; background: none; }
   .slide { break-after: page; min-height: 190mm; }
   .slide::before { background: #fff; }

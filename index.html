@@ -21,6 +21,47 @@
 <div class="grain" aria-hidden="true"></div>
 <div class="aurora" aria-hidden="true"></div>
 
+<!-- фоновая взвесь: буквы, книги, листочки. слой под слайдами,
+     двигается очень медленно и еле заметно, цвета эпохи ему даёт --acc -->
+<div class="motes" aria-hidden="true">
+  <span class="mote mote--glyph" style="--x:5%;--y:14%;--sz:11;--rot:-8deg;--mx:4;--my:-9;--dur:86s;--dl:-6s">А</span>
+  <span class="mote mote--glyph" style="--x:26%;--y:64%;--sz:6.4;--rot:7deg;--mx:-5;--my:7;--dur:74s;--dl:-21s;--o:.62">Б</span>
+  <span class="mote mote--glyph" style="--x:47%;--y:9%;--sz:7.6;--rot:4deg;--mx:6;--my:10;--dur:92s;--dl:-34s;--o:.5">В</span>
+  <span class="mote mote--glyph" style="--x:71%;--y:47%;--sz:13;--rot:-13deg;--mx:-4;--my:-7;--dur:104s;--dl:-11s;--o:.46">Ж</span>
+  <span class="mote mote--glyph" style="--x:88%;--y:76%;--sz:8.4;--rot:11deg;--mx:5;--my:-6;--dur:79s;--dl:-45s;--o:.55">Я</span>
+  <span class="mote mote--glyph" style="--x:14%;--y:83%;--sz:9.6;--rot:-6deg;--mx:7;--my:-11;--dur:97s;--dl:-27s;--o:.42">W</span>
+  <span class="mote mote--glyph" style="--x:60%;--y:24%;--sz:5.8;--rot:9deg;--mx:-6;--my:8;--dur:69s;--dl:-16s;--o:.6">ß</span>
+  <span class="mote mote--glyph" style="--x:36%;--y:38%;--sz:10.4;--rot:-11deg;--mx:3;--my:12;--dur:112s;--dl:-52s;--o:.38">Ω</span>
+  <span class="mote mote--glyph" style="--x:79%;--y:12%;--sz:7.2;--rot:6deg;--mx:-7;--my:9;--dur:88s;--dl:-38s;--o:.5">文</span>
+  <span class="mote mote--glyph" style="--x:2%;--y:44%;--sz:6.2;--rot:-4deg;--mx:8;--my:-5;--dur:76s;--dl:-9s;--o:.46">é</span>
+
+  <span class="mote mote--icon" style="--x:19%;--y:29%;--sz:9;--rot:-12deg;--mx:5;--my:-10;--dur:108s;--dl:-19s;--o:.5">
+    <svg viewBox="0 0 48 48"><path d="M24 13c-5-3-11-3-16-1v23c5-2 11-2 16 1 5-3 11-3 16-1V12c-5-2-11-2-16 1z"/><path d="M24 13v23"/></svg>
+  </span>
+  <span class="mote mote--icon" style="--x:55%;--y:69%;--sz:6.6;--rot:8deg;--mx:-4;--my:9;--dur:94s;--dl:-41s;--o:.42">
+    <svg viewBox="0 0 48 48"><path d="M13 9h16l9 9v21H13z"/><path d="M29 9v9h9"/><path d="M18 25h13M18 31h13"/></svg>
+  </span>
+  <span class="mote mote--icon" style="--x:83%;--y:35%;--sz:7.4;--rot:14deg;--mx:-6;--my:-8;--dur:101s;--dl:-14s;--o:.44">
+    <svg viewBox="0 0 48 48"><path d="M11 37C11 21 22 10 38 10c0 16-11 27-27 27z"/><path d="M15 33C21 26 28 21 34 17"/></svg>
+  </span>
+  <span class="mote mote--icon" style="--x:41%;--y:15%;--sz:5.4;--rot:-16deg;--mx:4;--my:11;--dur:82s;--dl:-30s;--o:.38">
+    <svg viewBox="0 0 48 48"><path d="M9 15h30v22H9z"/><path d="M9 21h30M15 27h18M15 32h12"/></svg>
+  </span>
+  <span class="mote mote--icon" style="--x:68%;--y:86%;--sz:6;--rot:-7deg;--mx:-3;--my:-9;--dur:89s;--dl:-23s;--o:.4">
+    <svg viewBox="0 0 48 48"><path d="M38 10C25 13 16 22 12 34l-3 9 9-3c12-4 21-13 24-26z"/><path d="M14 32l14-14"/></svg>
+  </span>
+  <span class="mote mote--icon" style="--x:9%;--y:66%;--sz:5;--rot:12deg;--mx:6;--my:7;--dur:71s;--dl:-48s;--o:.44">
+    <svg viewBox="0 0 48 48"><path d="M8 14l18 6-18 8zM30 20l10 4-10 6z"/></svg>
+  </span>
+
+  <span class="mote mote--dot" style="--x:31%;--y:21%;--sz:.6;--dur:64s;--dl:-5s;--o:.7;--mx:3;--my:-6"></span>
+  <span class="mote mote--dot" style="--x:64%;--y:39%;--sz:.45;--dur:58s;--dl:-18s;--o:.6;--mx:-4;--my:5"></span>
+  <span class="mote mote--dot" style="--x:44%;--y:58%;--sz:.75;--dur:72s;--dl:-33s;--o:.55;--mx:5;--my:8"></span>
+  <span class="mote mote--dot" style="--x:76%;--y:63%;--sz:.5;--dur:61s;--dl:-26s;--o:.65;--mx:-3;--my:-7"></span>
+  <span class="mote mote--dot" style="--x:22%;--y:48%;--sz:.4;--dur:55s;--dl:-12s;--o:.7;--mx:4;--my:6"></span>
+  <span class="mote mote--dot" style="--x:91%;--y:23%;--sz:.55;--dur:67s;--dl:-44s;--o:.6;--mx:-5;--my:-4"></span>
+</div>
+
 <header class="topbar">
   <a class="brand" href="#top">
     <span class="brand__glyph">4500</span>
