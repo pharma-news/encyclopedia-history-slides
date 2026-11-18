@@ -82,15 +82,16 @@
     requestAnimationFrame(update);
   }
 
-  /* авто-вписывание: если из-за переносов строк блок оказался выше экрана,
-     немного уменьшаем его (единица макета не учитывает квантование текста) */
+  /* авто-вписывание: если контент не помещается во вьюпорт, немного уменьшаем его
+     (единица макета не учитывает переносы строк и высоту фотографий) */
   function fit() {
+    var vh = window.innerHeight;
     slides.forEach(function (s) {
       var f = s.querySelector('.frame, .cover__body');
       if (!f) return;
       f.style.setProperty('--fit', '1');
       var cs = getComputedStyle(s);
-      var avail = s.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      var avail = Math.min(s.clientHeight, vh) - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
       var need = f.getBoundingClientRect().height;
       if (need > 0 && need > avail) f.style.setProperty('--fit', Math.max(0.72, avail / need).toFixed(3));
     });
@@ -100,6 +101,9 @@
   window.addEventListener('resize', function () { fit(); onScroll(); }, { passive: true });
   fit();
   update();
+  Array.prototype.forEach.call(document.querySelectorAll('.shot img'), function (img) {
+    img.addEventListener('load', fit);
+  });
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fit); }
   setTimeout(fit, 500);
 

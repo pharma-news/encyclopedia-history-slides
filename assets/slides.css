@@ -96,34 +96,28 @@
 
 .wheel {
   position: relative;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1;
   width: min(100%, calc(var(--s) * 19));
   margin-inline: auto;
+  aspect-ratio: 1;
 }
-.wheel__ring {
+.wheel svg { width: 100%; height: auto; }
+.wheel__spines rect {
+  fill: color-mix(in srgb, var(--acc) 74%, #2a1c08);
+  stroke: rgba(255, 246, 220, 0.4);
+  stroke-width: 0.6;
+  transform-origin: 0 0;
+}
+.wheel__spines rect:nth-child(3n) { fill: color-mix(in srgb, var(--acc-2) 60%, #1a1206); }
+.wheel__spines rect:nth-child(5n) { fill: color-mix(in srgb, var(--acc) 92%, #3a2a10); }
+.wheel__spines { animation: wheel-turn 90s linear infinite; transform-origin: 0 0; }
+@keyframes wheel-turn { to { transform: rotate(360deg); } }
+.wheel__core {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background: repeating-conic-gradient(
-    from -90deg,
-    color-mix(in srgb, var(--acc) 82%, #2a1c08) 0 6.3deg,
-    transparent 6.3deg 9.73deg
-  );
-  mask-image: radial-gradient(circle, transparent 58%, #000 58.6% 84%, transparent 85.4%);
-  opacity: 0.85;
-  animation: wheel-turn 70s linear infinite;
+  display: grid;
+  gap: calc(var(--s) * 0.15);
+  place-items: center;
 }
-.wheel::after {
-  content: "";
-  position: absolute;
-  inset: 6%;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--acc) 28%, transparent);
-}
-@keyframes wheel-turn { to { transform: rotate(360deg); } }
-.wheel__core { position: relative; display: grid; gap: calc(var(--s) * 0.15); justify-items: center; }
 .wheel__core b {
   font-family: var(--f-display);
   font-weight: 900;
@@ -217,11 +211,14 @@
 
 /* ---------- 04 · гравюра Дидро ---------- */
 .stage--plate { background: linear-gradient(160deg, rgba(236, 215, 166, 0.12), rgba(246, 241, 231, 0.02)); }
-.plate__word { font-family: var(--f-serif); font-size: 22px; letter-spacing: 0.18em; fill: #6b5438; }
-.plate__letter path { stroke-linecap: round; }
+.plate__word { font-family: var(--f-serif); font-size: 20px; letter-spacing: 0.18em; fill: #6b5438; }
+.plate__letter { font-family: var(--f-serif); font-weight: 600; font-size: 96px; fill: #2b2216; }
+.plate__page { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; fill: rgba(107,84,56,.75); }
+.plate__lines { opacity: .55; }
 .stamp text { font-family: var(--f-display); font-weight: 700; font-size: 20px; letter-spacing: 0.12em; fill: #d2382a; }
-.stamp { opacity: .95; }
+.stamp { opacity: .95; animation: stamp-press 7s var(--ease) infinite alternate; }
 .stamp rect { stroke-dasharray: 6 4; }
+@keyframes stamp-press { from { transform: rotate(-9deg) scale(1); opacity: .9; } to { transform: rotate(-11deg) scale(1.04); opacity: 1; } }
 .meter { display: grid; gap: calc(var(--s) * 0.3); }
 .meter__field {
   height: calc(var(--s) * 2.6);
@@ -256,15 +253,24 @@
 
 /* ---------- 07 · рукопись ---------- */
 .stage--folio { background: linear-gradient(160deg, rgba(207, 167, 95, 0.12), rgba(246, 241, 231, 0.02)); }
-.folio__entry text { font-family: var(--f-serif); font-size: 15px; fill: #4b3418; }
-.folio__entry text:nth-child(even) { font-size: 12px; fill: #6b5535; }
+.folio__head { font-family: var(--f-serif); font-weight: 600; font-size: 17px; fill: #8f2f22; }
+.folio__gloss { font-family: var(--f-serif); font-size: 12.5px; fill: #4b3418; }
 .folio__margin text { font-family: var(--f-serif); font-style: italic; font-size: 13px; fill: #8f2f22; }
 .folio__seal text { font-family: var(--f-display); font-weight: 700; font-size: 14px; fill: #a33c2b; }
+.legend { display: flex; flex-wrap: wrap; gap: calc(var(--s) * 0.9); font-size: var(--fs-nano); color: var(--paper-dim); letter-spacing: 0.06em; }
+.legend span { display: inline-flex; align-items: center; gap: calc(var(--s) * 0.3); }
+.legend__sw { width: calc(var(--s) * 0.55); height: calc(var(--s) * 0.55); border-radius: 50%; }
+.legend__sw--ink { background: #4b3418; }
+.legend__sw--red { background: #a33c2b; }
 
 /* ---------- 08 · медаль и тома Дашковой ---------- */
 .medal__quote { font-family: var(--f-serif); font-style: italic; text-align: center; font-size: calc(var(--s) * 1.25); line-height: 1.35; color: var(--acc); }
-.medal__word { font-family: var(--f-display); font-weight: 900; font-size: 22px; fill: #4d350d; letter-spacing: 0.12em; }
-.medal__year { font-family: var(--f-mono); font-size: 12px; fill: rgba(77, 53, 13, 0.75); letter-spacing: 0.08em; }
+.medal__word { font-family: var(--f-display); font-weight: 900; font-size: 17px; fill: #4d350d; letter-spacing: 0.14em; }
+.medal__year { font-family: var(--f-mono); font-size: 11px; fill: rgba(77, 53, 13, 0.72); letter-spacing: 0.08em; }
+.medal__disc { animation: medal-shine 8s var(--ease) infinite alternate; }
+.medal__wreath { opacity: .8; }
+.stage:hover .medal__disc { filter: brightness(1.18); }
+@keyframes medal-shine { from { filter: brightness(0.94); } to { filter: brightness(1.14) saturate(1.06); } }
 .stage--imperial { background: linear-gradient(160deg, rgba(234, 201, 107, 0.14), rgba(79, 127, 168, 0.1)); }
 
 .vols { display: flex; align-items: flex-end; gap: calc(var(--s) * 0.22); height: calc(var(--s) * 4.6); justify-content: center; }
@@ -320,7 +326,9 @@
   box-shadow: 0 calc(var(--s) * 0.5) calc(var(--s) * 1.4) rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(120, 92, 50, 0.35);
 }
+.entry__top { font-family: var(--f-mono); font-size: var(--fs-nano); letter-spacing: 0.1em; text-transform: uppercase; color: #7a6446; border-bottom: 1px solid rgba(120, 92, 50, 0.35); padding-bottom: calc(var(--s) * 0.25); margin-bottom: calc(var(--s) * 0.3); }
 .entry__head { font-family: var(--f-display); font-weight: 700; font-size: calc(var(--s) * 1.5); letter-spacing: 0.02em; margin-bottom: calc(var(--s) * 0.25); }
+.entry__pos { font-family: var(--f-mono); font-size: var(--fs-nano); font-weight: 400; color: #7a6446; letter-spacing: 0.08em; }
 .entry__body { font-family: var(--f-serif); font-size: calc(var(--s) * 0.95); line-height: 1.4; margin-bottom: calc(var(--s) * 0.2); }
 .entry__body b { font-family: var(--f-mono); font-weight: 500; }
 .entry__body i { color: #6b5535; }
@@ -462,6 +470,22 @@
 .slide--end::before { background: radial-gradient(90% 70% at 50% 110%, rgba(224, 164, 92, 0.16), transparent 60%), linear-gradient(180deg, rgba(9, 8, 14, 0.94), rgba(7, 6, 12, 0.98)); }
 .slide--end .frame { gap: var(--gap) 0; }
 .thanks { margin-top: calc(var(--s) * 0.8); }
+
+/* ---------- движение: «письмо» проявляется на артефактах ---------- */
+.slide--clay .signs { filter: drop-shadow(1.4px 1.4px 0 rgba(255, 232, 200, .28)); }
+.wiki__letters text { font-family: var(--f-serif); font-size: 13px; fill: rgba(233, 244, 255, .55); }
+.wiki__W { animation: w-float 6s var(--ease) infinite alternate; }
+@keyframes w-float { to { transform: translateY(-4px); } }
+@supports (animation-timeline: view()) {
+  .slide--clay .signs { animation: ink-wipe linear both; animation-timeline: view(block); animation-range: entry 22% cover 55%; }
+  .slide--china .wall__lost { animation: ink-wipe linear both; animation-timeline: view(block); animation-range: entry 18% cover 48%; }
+  .slide--france .plate__lines { animation: ink-wipe linear both; animation-timeline: view(block); animation-range: entry 20% cover 50%; }
+  .slide--rus .folio__lines { animation: ink-wipe linear both; animation-timeline: view(block); animation-range: entry 20% cover 50%; }
+  .slide--brokgauz .spines__row { animation: ink-wipe linear both; animation-timeline: view(block); animation-range: entry 15% cover 45%; }
+  .slide--dashkova .vols { animation: vols-rise linear both; animation-timeline: view(block); animation-range: entry 20% cover 50%; }
+  @keyframes ink-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes vols-rise { from { transform: scaleY(.4); transform-origin: bottom; } to { transform: scaleY(1); transform-origin: bottom; } }
+}
 
 /* ---------- телефон: подгонка иллюстраций ---------- */
 @media (max-width: 900px) {

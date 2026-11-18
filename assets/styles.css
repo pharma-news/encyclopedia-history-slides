@@ -276,6 +276,16 @@ svg { display: block; }
 }
 .frame--wide { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "prose" "visual"; }
 
+/* широкие слайды: заголовок на всю ширину, текст + фото-витрина, снизу — «подпись» эпохи */
+.frame--wide2 {
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  grid-template-areas:
+    "head   head"
+    "prose  visual"
+    "foot   foot";
+}
+.frame--wide2 .foot { grid-area: foot; display: grid; gap: var(--gap-s); }
+
 /* если из-за переносов строк контент не влезает по высоте — слайд чуть уменьшается (JS) */
 .frame, .cover__body { transform: scale(var(--fit, 1)); transform-origin: 50% 50%; }
 
@@ -363,6 +373,48 @@ svg { display: block; }
 
 .art { width: 100%; height: auto; }
 .art text { font-family: var(--f-display); }
+
+/* ---------- «витрина» с подлинными изображениями ---------- */
+.shot {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--radius) * 0.9);
+  border: 1px solid color-mix(in srgb, var(--acc) 32%, transparent);
+  background: #0a0b12;
+  box-shadow: 0 calc(var(--s) * 1.1) calc(var(--s) * 2.8) rgba(0, 0, 0, 0.58);
+  transition: border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* лёгкий зум: прячём чёрные поля исходных коллажей и не режем содержимое */
+  transform: scale(1.05);
+  transition: transform 1.1s var(--ease);
+}
+.shot::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--acc), transparent 68%);
+  opacity: 0.6;
+}
+.shot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 50% 112%, color-mix(in srgb, var(--acc) 22%, transparent), transparent 62%),
+    linear-gradient(180deg, color-mix(in srgb, var(--acc) 9%, transparent), transparent 34%);
+}
+.stage:hover .shot {
+  border-color: color-mix(in srgb, var(--acc) 58%, transparent);
+  box-shadow: 0 calc(var(--s) * 1.5) calc(var(--s) * 3.4) rgba(0, 0, 0, 0.62);
+}
+.stage:hover .shot img { transform: scale(1.12); }
+.stage--photo { padding: calc(var(--s) * 0.65) calc(var(--s) * 1.15) calc(var(--s) * 1.15); }
 
 .cap {
   font-size: var(--fs-micro);
@@ -560,6 +612,8 @@ svg { display: block; }
   gap: calc(var(--s) * 0.85);
   margin-top: var(--gap-s);
 }
+/* в широкой раскладке четыре карточки — одной строкой */
+.grid4--row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .card {
   position: relative;
   display: grid;
@@ -707,12 +761,13 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   }
   html { scroll-snap-type: none; }
   .slide { align-content: start; padding: calc(var(--s) * 8) var(--gutter) calc(var(--s) * 5.5); }
-  .frame, .frame--wide {
+  .frame, .frame--wide, .frame--wide2 {
     width: 100%;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "head" "prose" "visual";
+    grid-template-areas: "head" "prose" "visual" "foot";
     gap: var(--gap);
   }
+  .shot img { transform: scale(1.02); }
   .frame::before { display: none; }
   .frame, .cover__body { transform: none; }
   .head { gap: calc(var(--s) * 0.45); }
@@ -739,5 +794,7 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   .slide { break-after: page; min-height: 190mm; }
   .slide::before { background: #fff; }
   .stage { border-color: #d7d0c4; background: #fbf8f2; box-shadow: none; }
+  .shot { border-color: #d7d0c4; background: #fff; box-shadow: none; }
+  .shot img { transform: none; }
   .lead, .card__d, .cap, .tile span, .timeline__item { color: #3b3742; }
 }
