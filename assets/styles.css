@@ -49,6 +49,10 @@
 
   --radius:    calc(var(--s) * 0.7);
   --ease:      cubic-bezier(0.22, 0.61, 0.28, 1);
+
+  /* подпись лектора: на больших экранах она живёт в HTML текстом (так доступнее),
+     на телефоне её печатает псевдоэлемент внизу каждого слайда */
+  --credit: "Лектор: Коновалова О. И. • МКУК Библиотека им. А. С. Пушкина, г. Майского • 2026 • Создано с использованием ИИ-технологий";
 }
 
 /* ---------- reset ---------- */
@@ -701,20 +705,24 @@ svg { display: block; }
 .marquee__track em { color: var(--acc); font-style: normal; }
 @keyframes slide-left { to { transform: translateX(-50%); } }
 
-.scrollcue {
-  position: absolute;
-  inset: auto auto calc(var(--s) * 1.2) 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: calc(var(--s) * 0.4);
+/* ---------- подпись лектора: внизу каждого экрана ----------
+    слой-«ножки» decks: лежит ниже поля слайда (padding-bottom), поэтому
+    не залезает на текст, и не ловит клики (pointer-events: none) */
+.credit {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 4;
+  padding: calc(var(--s) * 1.15) calc(var(--s) * 4.2) calc(var(--s) * 0.55);
+  background: linear-gradient(180deg, rgba(7, 6, 12, 0), rgba(7, 6, 12, 0.5) 62%, rgba(7, 6, 12, 0.72));
+  text-align: center;
   font-size: var(--fs-nano);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
   color: var(--paper-dim);
+  opacity: 0.5;
+  pointer-events: none;
 }
-.scrollcue b { color: var(--acc); animation: nudge 1.9s var(--ease) infinite; }
-@keyframes nudge { 0%, 100% { transform: translateY(-2px); opacity: 0.5; } 50% { transform: translateY(4px); opacity: 1; } }
+.credit .sep { color: var(--acc); }
 
 /* ---------- карточки (слайд 05) ---------- */
 .grid4 {
@@ -878,7 +886,7 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
     --gap-s:     calc(var(--s) * 0.8);
   }
   html { scroll-snap-type: none; }
-  .slide { align-content: start; padding: calc(var(--s) * 8) var(--gutter) calc(var(--s) * 5.5); }
+  .slide { align-content: start; padding: calc(var(--s) * 8) var(--gutter) calc(var(--s) * 7.2); }
   .frame, .frame--wide, .frame--wide2 {
     width: 100%;
     grid-template-columns: minmax(0, 1fr);
@@ -894,9 +902,28 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   .stage { padding: calc(var(--s) * 1); }
   .topbar__nav, .dots, .next { display: none; }
   .lead, .pull, .cap, .callout, .lead--narrow { max-width: 100%; }
-  .marquee { bottom: calc(var(--s) * 2.6); }
-  .rail { bottom: calc(var(--s) * 5.2); }
-  .scrollcue { display: none; }
+  .marquee { bottom: calc(var(--s) * 4); }
+  .rail { bottom: calc(var(--s) * 6.6); }
+  /* на телефоне подпись внизу — постоянная «подложка», поэтому поля титула
+     и нижнее поле слайда чуть увеличены, чтобы она ни на что не легла */
+  /* на телефоне слайды — длинная лента: висящая внизу строка легла бы на текст
+     посреди экрана, поэтому там подпись становится статичной строкой внизу
+     каждого слайда */
+  .credit { display: none; }
+  .frame::after, .cover__body::after {
+    content: var(--credit);
+    display: block;
+    margin-top: calc(var(--s) * 1.6);
+    padding-top: calc(var(--s) * 0.6);
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: var(--fs-nano);
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    color: var(--paper-dim);
+    opacity: 0.55;
+  }
+  .cover__body::after { margin-top: calc(var(--s) * 2.6); }
   /* на телефоне фоновая взвесь всё равно почти не читается — оставляем половину */
   .mote:nth-child(2n) { display: none; }
   .grid4, .frame--wide2 .grid4 { grid-template-columns: minmax(0, 1fr); }
@@ -920,4 +947,7 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   .timeline { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: auto; }
   .frame--wide2 .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lead, .card__d, .cap, .tile span, .timeline__item { color: #3b3742; }
+  /* подпись лектора в печати — свои «ножки» на каждой странице */
+  .credit { color: #6b6570; opacity: 0.9; background: none; }
+  .credit .sep { color: #a97f3f; }
 }
