@@ -232,14 +232,52 @@
 .meter span { font-size: var(--fs-nano); color: var(--paper-dim); letter-spacing: 0.1em; }
 
 /* ---------- 06 · гонка и Википедия ---------- */
-.race { margin-top: calc(var(--s) * 0.4); border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(180deg, rgba(61, 143, 209, 0.14), rgba(229, 83, 61, 0.1)); padding: calc(var(--s) * 0.4); }
+.race { margin-top: calc(var(--s) * 0.4); border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(180deg, rgba(61, 143, 209, 0.14), rgba(229, 83, 61, 0.1)); padding: calc(var(--s) * 0.5) calc(var(--s) * 0.6) calc(var(--s) * 0.3); }
 .race__svg { width: 100%; }
-.race__name { font-family: var(--f-mono); font-size: 11px; fill: rgba(246, 241, 231, 0.55); letter-spacing: 0.12em; text-transform: uppercase; }
-.race__win { font-family: var(--f-mono); font-size: 10px; fill: color-mix(in srgb, var(--acc) 75%, transparent); letter-spacing: 0.1em; }
-.bird--plover { animation: dash-a 5s var(--ease) infinite alternate; }
-.bird--goose { animation: dash-b 6.4s var(--ease) infinite alternate; }
-@keyframes dash-a { from { transform: translate(70px, 15px); } to { transform: translate(300px, 15px); } }
-@keyframes dash-b { from { transform: translate(70px, 66px); } to { transform: translate(250px, 66px); } }
+.race__lanes path { fill: none; stroke: rgba(246, 241, 231, 0.22); stroke-width: 1; stroke-dasharray: 5 7; }
+.race__marks path { fill: none; stroke: rgba(246, 241, 231, 0.15); stroke-width: 1; }
+.race__name { font-family: var(--f-mono); font-size: 11px; fill: rgba(246, 241, 231, 0.6); letter-spacing: 0.12em; text-transform: uppercase; }
+.race__win { font-family: var(--f-mono); font-size: 10px; fill: color-mix(in srgb, var(--acc) 78%, transparent); letter-spacing: 0.14em; }
+.race__note { font-family: var(--f-mono); font-size: var(--fs-nano); letter-spacing: 0.08em; color: color-mix(in srgb, var(--acc) 72%, var(--paper-dim)); }
+
+/* бегуны: базовое положение задаём здесь, анимация гонки её же и меняет,
+   поэтому при prefers-reduced-motion птицы остаются на своих дорожках.
+   обе летят в одну тактовку, но ржанка проходит путь длиннее — она и приходит первой */
+.bird--plover { transform: translate(96px, 18px); animation: dash-a 5.4s var(--ease) infinite alternate; }
+.bird--goose { transform: translate(82px, 88px); animation: dash-b 5.4s var(--ease) infinite alternate; }
+@keyframes dash-a { from { transform: translate(96px, 18px); } to { transform: translate(298px, 18px); } }
+@keyframes dash-b { from { transform: translate(82px, 88px); } to { transform: translate(186px, 88px); } }
+
+/* ржанка — компактный плотный корпус, короткие оттянутые назад крылья */
+.pl-body { fill: url(#plBody); stroke: rgba(38, 24, 8, 0.22); stroke-width: 0.7; }
+.pl-belly { fill: #f7ecd9; opacity: 0.55; }
+.pl-beak { fill: #2c2016; }
+.pl-leg { fill: none; stroke: #c2934c; stroke-width: 1.6; stroke-linecap: round; }
+.bird--plover .wing--near { fill: #d9a85c; }
+.bird--plover .wing--far { fill: #b3823f; }
+/* гусь — крупный корпус, вытянутая вперёд шея, откинутые назад лапы */
+.gs-body { fill: url(#gsBody); stroke: rgba(38, 24, 8, 0.2); stroke-width: 0.7; }
+.gs-beak { fill: #e0813c; }
+.gs-foot { fill: none; stroke: #df8f4c; stroke-width: 1.8; stroke-linecap: round; }
+.gs-covert { fill: none; stroke: rgba(70, 58, 40, 0.26); stroke-width: 1.2; }
+.bird--goose .wing--near { fill: #ded4bd; }
+.bird--goose .wing--far { fill: #b6ab92; }
+.bird__eye { fill: #241a12; }
+
+/* крылья машут вокруг «плеча»: точка крепления — правый нижний угол фигуры крыла */
+.wing { transform-box: fill-box; transform-origin: 100% 100%; }
+.bird--plover .wing { animation: flap-fast 0.5s var(--ease) infinite alternate; }
+.bird--plover .wing--far { animation-delay: -0.08s; }
+.bird--goose .wing { animation: flap-slow 0.85s var(--ease) infinite alternate; }
+.bird--goose .wing--far { animation-delay: -0.14s; }
+@keyframes flap-fast { from { transform: rotate(-5deg); } to { transform: rotate(16deg); } }
+/* гусь машет «вниз», чтобы кончик крыла не лез в дорожку ржанки */
+@keyframes flap-slow { from { transform: rotate(-14deg); } to { transform: rotate(4deg); } }
+
+.finish__line { stroke: rgba(246, 241, 231, 0.5); stroke-width: 2; stroke-dasharray: 6 6; }
+.finish__flag { fill: #f6f1e7; transform-box: fill-box; transform-origin: 0 50%; animation: flag-wave 1.9s var(--ease) infinite alternate; }
+.fn-dark { fill: #171420; }
+@keyframes flag-wave { from { transform: rotate(-1.5deg) skewY(0deg); } to { transform: rotate(1.5deg) skewY(-2deg); } }
 
 .wiki { position: relative; display: grid; place-items: center; }
 .wiki__svg { width: min(100%, calc(var(--s) * 16)); margin-inline: auto; }
@@ -502,5 +540,5 @@
   .spines__row { height: calc(var(--s) * 3.4); }
   .authors { min-height: calc(var(--s) * 7); }
   .vols { height: calc(var(--s) * 3.8); }
-  .tiles--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tiles--compact { gap: calc(var(--s) * 0.7) calc(var(--s) * 0.9); }
 }

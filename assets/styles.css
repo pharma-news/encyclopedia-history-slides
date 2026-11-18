@@ -428,13 +428,15 @@ svg { display: block; }
 .tiles {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(var(--s) * 0.7) calc(var(--s) * 1.4);
+  gap: calc(var(--s) * 0.85) calc(var(--s) * 1.15);
   padding-top: calc(var(--s) * 0.6);
   border-top: 1px solid var(--line);
 }
 .tile {
-  flex: 1 1 0;
-  min-width: calc(var(--s) * 6);
+  /* min-width равна ширине содержимого: крупная цифра больше никогда
+     не наползает на соседнюю плитку — лишние плитки переносятся на строку ниже */
+  flex: 1 1 auto;
+  min-width: max-content;
   display: grid;
   gap: calc(var(--s) * 0.12);
   padding-left: calc(var(--s) * 0.5);
@@ -445,13 +447,20 @@ svg { display: block; }
 .tile b {
   font-family: var(--f-display);
   font-weight: 700;
-  font-size: calc(var(--fs-stat) * 0.92);
+  font-size: calc(var(--fs-stat) * 0.86);
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--acc);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
-.tile span { font-size: var(--fs-nano); color: var(--paper-dim); max-width: 22ch; line-height: 1.35; }
+.tile span { font-size: var(--fs-nano); color: var(--paper-dim); max-width: 15ch; line-height: 1.42; }
+
+/* когда в ряд нужно три крупных числа (03 · Юнлэ), чуть уплотняем саму ленту */
+.tiles--compact { gap: calc(var(--s) * 0.8) calc(var(--s) * 0.85); }
+.tiles--compact .tile { padding-left: calc(var(--s) * 0.4); }
+.tiles--compact .tile b { font-size: calc(var(--fs-stat) * 0.8); }
+.tiles--compact .tile span { max-width: 13ch; }
 
 /* ---------- цитата-выноски ---------- */
 .pull {
