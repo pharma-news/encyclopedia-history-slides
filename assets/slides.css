@@ -47,7 +47,7 @@
   opacity: 0.28;
 }
 .cover__glyph {
-  width: min(62vw, calc(var(--s) * 46));
+  width: min(70vw, calc(var(--s) * 66));
   transform: perspective(1200px) rotateX(8deg) rotateY(-14deg);
   animation: float-tilt 16s var(--ease) infinite alternate;
 }
@@ -492,9 +492,34 @@
 }
 .who span { padding: calc(var(--s) * 0.2) calc(var(--s) * 0.5); border: 1px solid var(--line); border-radius: 100px; background: rgba(127, 178, 255, 0.08); }
 
+/* ---------- распределение колонок под плотность слайда ----------
+   везде кадр тянет высоту колонки, поэтому там, где в панели только
+   фото и плитки цифр — фото получает больше ширины, а где в панели
+   есть ещё шкала или словарная карточка — кадр уступает место тексту */
+.slide--rome .frame,
+.slide--guinness .frame,
+.slide--bse .frame { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); }
+
+.slide--soviet .frame { grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr); }
+.slide--soviet .lead { max-width: 46ch; }
+
+.slide--france .frame,
+.slide--dal .frame { grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); }
+.slide--france .lead,
+.slide--dal .lead { max-width: 72ch; }
+
+/* ---------- 04 · шкала статей плотнее ---------- */
+.meter__field { height: calc(var(--s) * 2.1); }
+
+/* ---------- 09 · карточка словарной статьи плотнее ---------- */
+.slide--dal .stage { gap: calc(var(--s) * 0.62); }
+.entry { padding: calc(var(--s) * 0.62) calc(var(--s) * 0.85); }
+.entry__head { font-size: calc(var(--s) * 1.35); margin-bottom: calc(var(--s) * 0.2); }
+.entry__body { font-size: calc(var(--s) * 0.88); margin-bottom: calc(var(--s) * 0.15); }
+
 /* ---------- 13 · БРЭ: бумага → экран ---------- */
-.bridge { margin-block: calc(var(--s) * 0.8) 0; }
-.bridge__svg { width: 100%; }
+.bridge { margin-block: calc(var(--s) * 0.4) 0; display: grid; justify-items: center; }
+.bridge__svg { width: min(100%, calc(var(--s) * 30)); }
 .bridge__books { opacity: 0.92; filter: drop-shadow(0 calc(var(--s) * 0.3) calc(var(--s) * 0.6) rgba(0,0,0,.45)); }
 .bridge__cap { font-family: var(--f-mono); font-size: 12px; fill: rgba(246, 241, 231, 0.55); letter-spacing: 0.14em; text-transform: uppercase; }
 .bridge__arrow { animation: nudge-x 2.4s var(--ease) infinite alternate; }
@@ -527,6 +552,17 @@
 
 /* ---------- телефон: подгонка иллюстраций ---------- */
 @media (max-width: 900px) {
+  /* колонки снова одна под другой — сняем «плотные» пропорции из блока выше */
+  .slide--rome .frame,
+  .slide--guinness .frame,
+  .slide--bse .frame,
+  .slide--soviet .frame,
+  .slide--france .frame,
+  .slide--dal .frame { grid-template-columns: minmax(0, 1fr); }
+  .slide--soviet .lead,
+  .slide--france .lead,
+  .slide--dal .lead { max-width: 100%; }
+
   .wheel { width: min(100%, calc(var(--s) * 16)); }
   .wheel__core b { font-size: calc(var(--s) * 2.6); }
   .wall__lost { height: calc(var(--s) * 4.4); }

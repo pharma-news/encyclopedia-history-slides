@@ -10,18 +10,26 @@
      поэтому слайд всегда помещается на экран без прокрутки */
   --s: min(1vw, 1.66vh);
 
-  --fs-hero:   calc(var(--s) * 6.0);
-  --fs-title:  calc(var(--s) * 2.95);
-  --fs-h3:     calc(var(--s) * 1.42);
-  --fs-lead:   calc(var(--s) * 1.32);
-  --fs-stat:   calc(var(--s) * 2.1);
-  --fs-body:   calc(var(--s) * 1.02);
-  --fs-micro:  calc(var(--s) * 0.8);
-  --fs-nano:   calc(var(--s) * 0.68);
+  --fs-hero:   calc(var(--s) * 7.2);
+  --fs-title:  calc(var(--s) * 3.2);
+  --fs-h3:     calc(var(--s) * 1.5);
+  --fs-lead:   calc(var(--s) * 1.46);
+  --fs-stat:   calc(var(--s) * 2.3);
+  --fs-body:   calc(var(--s) * 1.1);
+  --fs-micro:  calc(var(--s) * 0.86);
+  --fs-nano:   calc(var(--s) * 0.72);
 
-  --gutter:    calc(var(--s) * 3.4);
-  --gap:       calc(var(--s) * 1.7);
-  --gap-s:     calc(var(--s) * 0.95);
+  /* поля слайда: раньше кадр был шириной 62s, из-за чего по бокам
+      оставалось почти 40% экрана; теперь кадр занимает всю ширину
+      за вычетом узкого желобка, а вертикаль задают --pad-t/--pad-b */
+  --gutter:    calc(var(--s) * 2.9);
+  --gap:       calc(var(--s) * 1.9);
+  --gap-s:     calc(var(--s) * 1.05);
+
+  --pad-t:     calc(var(--s) * 4.3);
+  --pad-b:     calc(var(--s) * 3.4);
+  --frame-w:   calc(var(--s) * 104);
+  --frame-h:   calc(100svh - var(--pad-t) - var(--pad-b));
 
   --ink:       #07060c;
   --ink-2:     #100e1a;
@@ -232,7 +240,7 @@ svg { display: block; }
   min-height: 100svh;
   display: grid;
   align-content: center;
-  padding: calc(var(--s) * 5.4) var(--gutter) calc(var(--s) * 4.2);
+  padding: var(--pad-t) var(--gutter) var(--pad-b);
   scroll-snap-align: start;
   isolation: isolate;
   overflow: hidden;
@@ -265,24 +273,33 @@ svg { display: block; }
 .frame {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
   grid-template-areas:
     "head  head"
     "prose visual";
-  gap: var(--gap) calc(var(--gap) * 1.35);
-  align-items: center;
-  width: min(100%, calc(var(--s) * 62));
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--gap) calc(var(--gap) * 1.55);
+  align-items: stretch;
+  width: min(100%, var(--frame-w));
+  min-height: var(--frame-h);
   margin-inline: auto;
 }
-.frame--wide { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "prose" "visual"; }
+.frame--wide {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "head" "prose" "visual";
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
 
-/* широкие слайды: заголовок на всю ширину, текст + фото-витрина, снизу — «подпись» эпохи */
+/* широкие слайды: заголовок на всю ширину, текст + фото-витрина, снизу — «подпись» эпохи.
+   колонка с фото уже текстовой: снизу у таких слайдов ещё и ряд «подписи»,
+   поэтому кадр должен быть ниже */
 .frame--wide2 {
-  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   grid-template-areas:
     "head   head"
     "prose  visual"
     "foot   foot";
+  grid-template-rows: auto minmax(0, 1fr) auto;
 }
 .frame--wide2 .foot { grid-area: foot; display: grid; gap: var(--gap-s); }
 
@@ -334,19 +351,21 @@ svg { display: block; }
 }
 .title--center { font-size: calc(var(--fs-title) * 1.06); }
 
-.prose { grid-area: prose; display: grid; gap: var(--gap-s); align-content: center; }
-.lead { font-size: var(--fs-lead); line-height: 1.6; max-width: 44ch; color: var(--paper); }
+.prose { grid-area: prose; display: grid; gap: calc(var(--gap-s) * 1.15); align-content: center; }
+.lead { font-size: var(--fs-lead); line-height: 1.62; max-width: 58ch; color: var(--paper); }
 .lead b { font-weight: 800; color: #fff; }
 .lead--dim { color: var(--paper-dim); }
-.lead--narrow { max-width: 60ch; }
+.lead--narrow { max-width: 78ch; }
 
-.visual { grid-area: visual; display: grid; gap: var(--gap-s); align-content: center; justify-items: stretch; }
+.visual { grid-area: visual; display: grid; gap: var(--gap-s); align-content: stretch; justify-items: stretch; grid-template-rows: minmax(0, 1fr); }
 .visual--big { gap: var(--gap); }
 
 /* ---------- «витрина» артефакта ---------- */
 .stage {
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   gap: calc(var(--s) * 0.8);
   padding: calc(var(--s) * 1.15) calc(var(--s) * 1.3);
   border-radius: var(--radius);
@@ -377,6 +396,11 @@ svg { display: block; }
 /* ---------- «витрина» с подлинными изображениями ---------- */
 .shot {
   position: relative;
+  /* рамка 16:9 задаёт собой пропорцию: картинка остаётся естественной
+     высоты, а если места не хватает — чуть срезается, а не деформируется */
+  flex: 0 1 auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: calc(var(--radius) * 0.9);
   border: 1px solid color-mix(in srgb, var(--acc) 32%, transparent);
@@ -385,9 +409,12 @@ svg { display: block; }
   transition: border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
 }
 .shot img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   /* лёгкий зум: прячём чёрные поля исходных коллажей и не режем содержимое */
   transform: scale(1.05);
   transition: transform 1.1s var(--ease);
@@ -420,7 +447,7 @@ svg { display: block; }
   font-size: var(--fs-micro);
   line-height: 1.45;
   color: var(--paper-dim);
-  max-width: 42ch;
+  max-width: 56ch;
 }
 .caption--inline { font-size: var(--fs-micro); color: var(--paper-dim); }
 
@@ -454,7 +481,7 @@ svg { display: block; }
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.tile span { font-size: var(--fs-nano); color: var(--paper-dim); max-width: 15ch; line-height: 1.42; }
+.tile span { font-size: var(--fs-nano); color: var(--paper-dim); max-width: 19ch; line-height: 1.42; }
 
 /* когда в ряд нужно три крупных числа (03 · Юнлэ), чуть уплотняем саму ленту */
 .tiles--compact { gap: calc(var(--s) * 0.8) calc(var(--s) * 0.85); }
@@ -488,7 +515,7 @@ svg { display: block; }
   justify-self: center;
   max-width: 64ch;
   text-align: center;
-  font-size: calc(var(--s) * 1.45);
+  font-size: calc(var(--s) * 1.25);
   line-height: 1.4;
   font-family: var(--f-display);
   font-weight: 300;
@@ -511,10 +538,10 @@ svg { display: block; }
 
 /* ---------- заголовок-герой (титул) ---------- */
 .slide--cover { align-content: center; text-align: center; }
-.cover__body { display: grid; gap: calc(var(--s) * 0.9); justify-items: center; z-index: 1; }
+.cover__body { display: grid; gap: calc(var(--s) * 1.15); justify-items: center; align-content: center; min-height: var(--frame-h); z-index: 1; }
 .cover__kicker {
   font-family: var(--f-mono);
-  font-size: var(--fs-nano);
+  font-size: calc(var(--fs-nano) * 1.25);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--acc);
@@ -534,11 +561,11 @@ svg { display: block; }
   font-family: var(--f-serif);
   font-style: italic;
   font-weight: 500;
-  font-size: calc(var(--s) * 1.45);
+  font-size: calc(var(--s) * 1.7);
   letter-spacing: 0.28em;
   text-transform: lowercase;
   color: var(--paper-dim);
-  margin-block: calc(var(--s) * 0.45);
+  margin-block: calc(var(--s) * 0.55);
 }
 .cover__line--wiki {
   color: transparent;
@@ -549,7 +576,7 @@ svg { display: block; }
   animation: wiki-shift 9s var(--ease) infinite alternate;
 }
 @keyframes wiki-shift { to { background-position: 100% 0; } }
-.cover__lead { max-width: 50ch; color: var(--paper-dim); font-size: var(--fs-lead); }
+.cover__lead { max-width: 62ch; color: var(--paper-dim); font-size: calc(var(--fs-lead) * 1.08); }
 
 /* ---------- «рельс» эпох на титуле ---------- */
 .rail {
@@ -623,6 +650,7 @@ svg { display: block; }
 }
 /* в широкой раскладке четыре карточки — одной строкой */
 .grid4--row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.frame--wide2 .grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .card {
   position: relative;
   display: grid;
@@ -685,14 +713,17 @@ svg { display: block; }
 /* ---------- финальный слайд ---------- */
 .timeline {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--s) * 9)), 1fr));
-  gap: calc(var(--s) * 0.5);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  align-content: stretch;
+  gap: calc(var(--s) * 0.6);
   margin-top: var(--gap);
 }
 .timeline__item {
   position: relative;
   display: grid;
   gap: calc(var(--s) * 0.12);
+  align-content: center;
   padding: calc(var(--s) * 0.55) calc(var(--s) * 0.6);
   border-radius: calc(var(--radius) * 0.7);
   border: 1px solid var(--line);
@@ -778,7 +809,7 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   }
   .shot img { transform: scale(1.02); }
   .frame::before { display: none; }
-  .frame, .cover__body { transform: none; }
+  .frame, .cover__body { transform: none; min-height: 0; }
   .head { gap: calc(var(--s) * 0.45); }
   .head__meta { gap: calc(var(--s) * 0.7); }
   .idx { font-size: calc(var(--s) * 1.8); }
@@ -788,7 +819,7 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   .marquee { bottom: calc(var(--s) * 2.6); }
   .rail { bottom: calc(var(--s) * 5.2); }
   .scrollcue { display: none; }
-  .grid4 { grid-template-columns: minmax(0, 1fr); }
+  .grid4, .frame--wide2 .grid4 { grid-template-columns: minmax(0, 1fr); }
   .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .finale { font-size: calc(var(--s) * 1.6); }
 }
@@ -802,8 +833,11 @@ html.no-sda .reveal.is-in { opacity: 1; transform: none; }
   .topbar { position: static; background: none; }
   .slide { break-after: page; min-height: 190mm; }
   .slide::before { background: #fff; }
+  .frame, .cover__body { min-height: 0; }
   .stage { border-color: #d7d0c4; background: #fbf8f2; box-shadow: none; }
   .shot { border-color: #d7d0c4; background: #fff; box-shadow: none; }
   .shot img { transform: none; }
+  .timeline { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: auto; }
+  .frame--wide2 .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lead, .card__d, .cap, .tile span, .timeline__item { color: #3b3742; }
 }
